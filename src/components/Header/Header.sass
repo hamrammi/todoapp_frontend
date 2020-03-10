@@ -1,0 +1,31 @@
+.Header
+  height: 20vmin
+  pointer-events: none
+  text-align: center
+  background-color: #282c34
+  display: flex
+  align-items: center
+  justify-content: center
+
+  .Header__Logo
+    height: 200px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    font-size: calc(10px + 2vmin)
+    color: white
+
+    @media (prefers-reduced-motion: no-preference)
+      .Header__Logo
+        animation: HeaderLogoSpin infinite 20s linear
+
+    @keyframes HeaderLogoSpin
+      from
+        transform: rotate(0deg)
+      to
+        transform: rotate(360deg)
+
+
+  .Header__Link
+    color: #61dafb
