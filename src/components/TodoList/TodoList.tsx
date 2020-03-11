@@ -1,17 +1,19 @@
 import React from 'react'
 import './TodoList.sass'
 import {useStore} from "../../utils/hooks";
-import { State } from "../../store/store";
+import {State, TodoItemsByListId} from "../../store/store";
 
 export default function TodoList () {
-  let todos: string[] = useStore((store: State) => store.todoItems)
+  let currentListId: string = useStore((store: State) => store.currentListId)
+  let todoItems: TodoItemsByListId = useStore((store: State) => store.todoItemsByListId[currentListId])
 
   return (
     <div className="TodoList">
       <div className="TodoList__Items">
-        {todos.map(todo =>
-          <div key={todo} className="TodoList__Item">{todo}</div>
-        )}
+        {todoItems && Object.keys(todoItems).map(todoId => {
+          const todoItem = todoItems[todoId]
+          return (<div key={todoId} className="TodoList__Item">{todoItem.name}</div>)
+        })}
       </div>
     </div>
   )

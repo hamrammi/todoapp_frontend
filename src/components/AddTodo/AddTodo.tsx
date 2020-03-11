@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import './AddTodo.sass'
-import {addTodo} from "../../store/actions";
+import {addTodoItem} from "../../store/actions";
 
 export default function AddTodo () {
   const [value, setValue] = useState('')
 
   function onSubmit (e: any) {
     e.preventDefault()
-    addTodo(value)
+    // addTodoItem(value)
   }
 
   return (
