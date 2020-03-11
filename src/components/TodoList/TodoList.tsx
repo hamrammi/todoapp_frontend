@@ -1,16 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import './TodoList.sass'
-import {getTodos, subscribeOnTodoAdded, unsubscribeOnTodoAdded} from "../../services/api";
+import {useStore} from "../../utils/hooks";
+import { State } from "../../store/store";
 
 export default function TodoList () {
-  let [todos, setTodos] = useState(getTodos())
-  useEffect(() => {
-    function onTodoItemAdded () {
-      setTodos(getTodos())
-    }
-    subscribeOnTodoAdded(onTodoItemAdded)
-    return unsubscribeOnTodoAdded
-  }, [])
+  let todos: string[] = useStore((store: State) => store.todoItems)
 
   return (
     <div className="TodoList">
