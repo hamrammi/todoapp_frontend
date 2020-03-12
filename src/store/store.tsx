@@ -1,4 +1,5 @@
 
+// ---- List Items ----
 interface ListItem {
   id: string
   name: string
@@ -8,25 +9,29 @@ export interface ListItems {
   [key: string]: ListItem
 }
 
+// ---- _Todo Items ----
 interface TodoItem {
   id: string
   name: string
 }
 
-export interface TodoItemsByListId {
-  [key: string]: { [key: string]: TodoItem }
+export interface TodoItems {
+  [key: string]: TodoItem
 }
 
+// ---- The State Interface ----
 export interface State {
   currentListId: string
   listItems: ListItems
-  todoItemsByListId: TodoItemsByListId
+  todoItemsByListId: { [key: string]: string[] }
+  todoItems: TodoItems
 }
 
 const Store: State = {
   currentListId: '',
   listItems: {},
-  todoItemsByListId: {}
+  todoItemsByListId: {},
+  todoItems: {}
 }
 
 export default Store

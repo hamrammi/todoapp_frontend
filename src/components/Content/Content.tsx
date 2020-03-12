@@ -14,7 +14,9 @@ export default function Content () {
       <AddTodo/>
       {Object.keys(listItems).map((listItemId) => {
         const listItem = listItems[listItemId]
-        return (<div>{listItem.name}</div>)
+        return (
+          <div key={listItem.id}>{listItem.name}</div>
+        )
       })}
       <TodoList/>
     </div>

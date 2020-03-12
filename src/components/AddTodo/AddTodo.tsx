@@ -1,13 +1,14 @@
-import React, {useState} from 'react'
+import React, {FormEvent, useState} from 'react'
 import './AddTodo.sass'
 import {addTodoItem} from "../../store/actions";
 
 export default function AddTodo () {
   const [value, setValue] = useState('')
 
-  function onSubmit (e: any) {
+  function onSubmit (e: FormEvent) {
     e.preventDefault()
-    // addTodoItem(value)
+    addTodoItem(value)
+    setValue('')
   }
 
   return (
@@ -19,6 +20,7 @@ export default function AddTodo () {
           type="text"
           name="TodoItem"
           autoComplete="off"
+          value={value}
           onChange={(e) => setValue(e.target.value)}
           id="AddTodoForm__TodoItem"
           className="AddTodo__Form__Input"/>

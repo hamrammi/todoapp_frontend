@@ -1,5 +1,7 @@
 import {Subscription} from "../utils/subscription";
-import Store, {TodoItemsByListId} from "./store";
+import Store from "./store";
+
+// TODO: use immutable operations
 
 export function addListItem (name: string): string {
   const id = Math.random() + 'ListItem'
@@ -8,12 +10,16 @@ export function addListItem (name: string): string {
   return id
 }
 
-export function addTodoItem (listItemId: string, name: string): string {
-  const id = Math.random() + 'TodoItem'
-  const todoItem = Store.todoItemsByListId[listItemId]
-  todoItem[id] = { id, name }
+export function addTodoItem (name: string): string {
+  const listItemId = Store.currentListId
+  const todoId = Math.random() + 'TodoItem'
+  if (!(listItemId in Store.todoItemsByListId)) {
+    Store.todoItemsByListId[listItemId] = []
+  }
+  Store.todoItemsByListId[listItemId] = Store.todoItemsByListId[listItemId].concat(todoId)
+  Store.todoItems[todoId] = { id: todoId, name }
   Subscription.doUpdate()
-  return id
+  return todoId
 }
 
 export function setCurrentListId (listItemId: string): string {
